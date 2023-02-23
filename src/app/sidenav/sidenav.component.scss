@@ -1,0 +1,25 @@
+$dark-blue: #001233;
+$light-font: #0466C8;
+$blue-grey: #33415C;
+
+.sidenav {
+    user-select: none;
+    background-color: $dark-blue;
+    text-align: center;
+    color: $light-font;
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
+    height: 100vh;
+    position: absolute;
+    border-radius: 0 15px 15px 0;
+    align-items: center;
+
+    .sidenav-title {
+        width: inherit;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 1.5rem;
+        border-bottom: 1px solid $blue-grey;
+    }
+}

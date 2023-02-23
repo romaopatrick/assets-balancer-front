@@ -1,0 +1,104 @@
+$dblue: #001233;
+$light-font: #0466C8;
+$blue-grey: #33415C;
+$lgrey: #979DAC;
+
+.assets-section {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    height: 90vh;
+    margin-left: 10vw;
+    align-items: center;
+    gap: 10vh;
+
+    .assets-section-header {
+        margin-top: 10px;
+        padding-left: 2vw;
+        color: $lgrey;
+        border-radius: 10px;
+        user-select: none;
+        font-size: 3rem;
+        align-self: flex-start;
+    }
+
+    .group-plus {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5vh;
+        width: 90%;
+        height: 90%;
+
+        .assets-group-div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1vh;
+            width: 100%;
+            overflow-y: auto;
+            height: 100%;
+
+
+            .div-actions {
+                display: flex;
+                width: 100%;
+                height: 4vh;
+                gap: 1vw;
+
+                .btn {
+                    height: 100%;
+                    cursor: pointer;
+                    border-radius: 5px;
+                }
+
+                .btn:hover {
+                    background: $dblue;
+                }
+
+                .div-itm {
+                    cursor: pointer;
+                    color: $dblue;
+                    background-color: $lgrey;
+                    border: 2px solid $dblue;
+                    font-size: 1.3rem;
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 90%;
+                    height: 4vh;
+                    padding-left: 10px;
+
+                    .left {
+                        display: flex;
+                        width: 70%;
+                        text-align: center;
+                    }
+
+                    .right {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        width: 30%;
+                    }
+
+                }
+
+                .div-itm:hover {
+                    background-color: #646465;
+                }
+            }
+        }
+
+        .plus {
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .plus:hover {
+            background-color: $dblue;
+        }
+    }
+
+}

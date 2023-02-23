@@ -1,0 +1,17 @@
+<section class="assets-section">
+    <div class="assets-section-header">
+        Assets Groups
+    </div>
+    <div class="group-plus">
+        <img class="plus" src="../../../assets/plus.svg">
+        <nav class="assets-group-div">
+            <div class="div-actions">
+                <div *ngFor="let ag of assetsGroups" routerLink="group/{{ag.Id}}" class="div-itm">
+                    <div class="left">{{ag.Label}}</div>
+                    <div class="right"><img src="../../assets/rarrow.svg"></div>
+                </div>
+                <img src="../../assets/ltrash.svg" class="btn">
+            </div>
+        </nav>
+    </div>
+</section>

@@ -1,0 +1,169 @@
+$dblue: #001233;
+$light-font: #0466C8;
+$blue-grey: #33415C;
+$lgrey: #979DAC;
+
+.assets-section {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    height: 90vh;
+    margin-left: 10vw;
+    align-items: center;
+    text-align: center;
+    gap: 4vh;
+    color: $lgrey;
+
+    .header {
+        width: 100%;
+        user-select: none;
+        align-self: flex-start;
+        display: flex;
+        text-align: center;
+
+        .larrow {
+            padding: 10px;
+            justify-self: flex-start;
+            border-radius: 50%;
+            width: 3%;
+            cursor: pointer;
+            svg path { 
+                fill: $lgrey !important;
+            }
+        }
+        .larrow:hover {
+            background-color: $dblue;
+        }
+        h1 {
+            padding: 10px;
+            font-size: 3rem;
+        }
+    }
+
+    .contribution-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 1.2rem;
+
+        .contribution-lbl {
+            justify-self: start;
+        }
+
+        .contribution-save {
+            height: 5vh;
+            display: flex;
+            gap: 8px;
+            font-size: 2rem;
+
+            .save {
+                display: flex;
+                align-items: center;
+                border: 1px solid $dblue;
+                height: 100%;
+                border-radius: 10px;
+                background-color: $dblue;
+                color: $lgrey;
+                padding: 15px;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+
+            .save:hover {
+                background-color: #00123392;
+            }
+
+            .contribution {
+                border-radius: 10px;
+                border-style: none;
+                background-color: #979dac5d;
+                font-size: 1.5rem;
+                color: $dblue;
+                height: 100%;
+                text-align: center;
+            }
+
+            .contribution:focus {
+                background-color: $lgrey;
+                outline: none;
+            }
+        }
+    }
+
+
+
+    .table {
+        display: flex;
+        background-color: $dblue;
+        width: 80%;
+        max-height: 100%;
+        border-radius: 10px;
+        padding: 10px;
+
+        table,
+        td {
+            border: 1px solid $lgrey;
+
+            input {
+                background: $dblue;
+                color: $lgrey;
+                border-style: none;
+                width: 80%;
+                text-align: center;
+                font-family: inherit;
+                font-size: inherit;
+                outline: none;
+                border-radius: 2px;
+            }
+
+            input:hover {
+                background-color: $blue-grey;
+            }
+
+            input:focus {
+                background-color: $blue-grey;
+            }
+
+            input[label] {
+                width: 100%;
+            }
+            img {
+                user-select: none;
+                height: 24px;
+                width: 24px;
+                cursor: pointer;
+                padding: 3px;
+            }
+            img:hover {
+                background-color: $blue-grey;
+                border-radius: 5px;
+            }
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border-radius: 10px;
+
+            thead {
+                background: $lgrey;
+                color: $dblue;
+            }
+        }
+    }
+
+    .plus {
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .plus:hover {
+        background-color: $dblue;
+    }
+
+}

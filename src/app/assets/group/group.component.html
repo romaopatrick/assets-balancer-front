@@ -1,0 +1,57 @@
+<section class="assets-section">
+    <div class="header">
+        <img routerLink="/" class="larrow" src="../../../assets/larrow.svg">
+        <h1>{{assetsGroup?.Label}}</h1>
+    </div>
+    <div class="contribution-container">
+        <label class="contribution-lbl">contribution total:</label>
+        <div class="contribution-save">
+            R$<input #contributionT class="contribution" type="number" [(ngModel)]="assetsGroup!.ContributionTotal">
+            <button class="save" (click)="updateContributionTotal(contributionT.value)">Distribute</button>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Include</th>
+                    <th>Label</th>
+                    <th>Score</th>
+                    <th>Previous Value</th>
+                    <th>Current Value</th>
+                    <th>Value Variation</th>
+                    <th>Percentage from total</th>
+                    <th>Final Contribution</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of assetsGroup?.Assets">
+                    <td><input type="checkbox" (change)="updateAsset(a)" [(ngModel)]="a.Include"></td>
+                    <td><input (change)="updateAsset(a)" label [(ngModel)]="a.Label" ></td>
+                    <td><input (change)="updateAsset(a)" type="number" [(ngModel)]="a.Score" /></td>
+                    <td>R$<input (change)="updateAsset(a)"  type="number" [(ngModel)]="a.PreviousValue"></td>
+                    <td>R$<input type="number" (change)="updateAsset(a)" [(ngModel)]="a.CurrentValue"></td>
+                    <td>{{a.ValueVariation.toFixed(2)| percent: '0.0-9'}}</td>
+                    <td>{{a.PercentageFromTotal.toFixed(2)| percent: '0.0-9'}}</td>
+                    <td>R$ {{a.FinalContribution.toFixed(2)}}</td>
+                    <td>
+                        <img src="../../../assets/trash.svg" (click)="deleteAsset(a)">
+                    </td>
+                </tr>
+                <tr class="total">
+                    <td> - </td>
+                    <td>{{total.Label}}</td>
+                    <td>{{total.Score}}</td>
+                    <td>R$ {{total.PreviousValue}}</td>
+                    <td>R$ {{total.CurrentValue}}</td>
+                    <td>{{total.ValueVariation.toFixed(2)| percent: '0.0-9'}}</td>
+                    <td>{{total.PercentageFromTotal.toFixed(2)| percent: '0.0-9'}}</td>
+                    <td>{{total.FinalContribution.toFixed(2) | currency: 'BRL'}}</td>
+                    <td> - </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <img class="plus" src="../../../assets/plus.svg" (click)="addEmptyAsset()">
+</section>
