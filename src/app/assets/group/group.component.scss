@@ -18,9 +18,10 @@ $lgrey: #979DAC;
         width: 100%;
         user-select: none;
         align-self: flex-start;
+        align-items: center;
         display: flex;
         text-align: center;
-
+        gap: 1vw;
         .larrow {
             padding: 10px;
             justify-self: flex-start;
@@ -35,7 +36,8 @@ $lgrey: #979DAC;
             background-color: $dblue;
         }
         h1 {
-            padding: 10px;
+            padding-top: 13px;
+            text-align: center;
             font-size: 3rem;
         }
     }
@@ -49,6 +51,7 @@ $lgrey: #979DAC;
 
         .contribution-lbl {
             justify-self: start;
+            padding: 10px 10px 10px 0 ;
         }
 
         .contribution-save {
@@ -56,6 +59,9 @@ $lgrey: #979DAC;
             display: flex;
             gap: 8px;
             font-size: 2rem;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
 
             .save {
                 display: flex;

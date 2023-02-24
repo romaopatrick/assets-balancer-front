@@ -1,7 +1,7 @@
 <section class="assets-section">
     <div class="header">
         <img routerLink="/" class="larrow" src="../../../assets/larrow.svg">
-        <h1>{{assetsGroup?.Label}}</h1>
+        <h1>{{assetsGroup.Label}}</h1>
     </div>
     <div class="contribution-container">
         <label class="contribution-lbl">contribution total:</label>
@@ -43,8 +43,8 @@
                     <td> - </td>
                     <td>{{total.Label}}</td>
                     <td>{{total.Score}}</td>
-                    <td>R$ {{total.PreviousValue}}</td>
-                    <td>R$ {{total.CurrentValue}}</td>
+                    <td>R$ {{total.PreviousValue.toFixed(2)}}</td>
+                    <td>R$ {{total.CurrentValue.toFixed(2)}}</td>
                     <td>{{total.ValueVariation.toFixed(2)| percent: '0.0-9'}}</td>
                     <td>{{total.PercentageFromTotal.toFixed(2)| percent: '0.0-9'}}</td>
                     <td>{{total.FinalContribution.toFixed(2) | currency: 'BRL'}}</td>

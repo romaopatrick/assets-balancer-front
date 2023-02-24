@@ -16,31 +16,43 @@ export class AssetsService {
   }
 
   getAssetsGroup(id: string): Observable<AssetsGroup> {
-    return this.http.get<AssetsGroup>( `${environment.api + environment.assetsGroup}/${id}`)
+    return this.http.get<AssetsGroup>(`${environment.api + environment.assetsGroup}/${id}`)
   }
 
-  updateContributionTotal(id: string, contributionT: number): Observable<AssetsGroup> {
+  updateAssetsGroup(input: {
+    id: string
+    contributionT?: number
+    label?: string
+  }): Observable<AssetsGroup> {
     return this.http.put<AssetsGroup>(environment.api + environment.contributionTotal, {
-      Id: id, ContributionTotal: contributionT
+      Id: input.id, ContributionTotal: input.contributionT, Label: input.label
     })
   }
 
   updateAsset(input: Asset, groupId: string): Observable<AssetsGroup> {
     return this.http.put<AssetsGroup>(environment.api + environment.assets,
       {
-        Id:input.Id,
+        Id: input.Id,
         GroupId: groupId,
         Label: input.Label,
         Score: input.Score,
-        PreviousValue:input.PreviousValue,
-        CurrentValue:input.CurrentValue ,
-        Include:input.Include, 
-    })
+        PreviousValue: input.PreviousValue,
+        CurrentValue: input.CurrentValue,
+        Include: input.Include,
+      })
   }
   deleteAsset(id: string, groupId: string): Observable<AssetsGroup> {
     return this.http.request<AssetsGroup>("DELETE", environment.api + environment.assets, {
       body: {
         Id: id, GroupId: groupId
+      }
+    })
+  }
+
+  deleteAssetsGroup(id: string): Observable<any> {
+    return this.http.request<AssetsGroup>("DELETE", environment.api + environment.assetsGroup, {
+      body: {
+        Id: id,
       }
     })
   }
@@ -51,10 +63,10 @@ export class AssetsService {
         GroupId: groupId,
         Label: input.Label,
         Score: input.Score,
-        PreviousValue:input.PreviousValue,
-        CurrentValue:input.CurrentValue ,
-        Include:input.Include, 
-    })
+        PreviousValue: input.PreviousValue,
+        CurrentValue: input.CurrentValue,
+        Include: input.Include,
+      })
   }
   createAssetsGroup(input: AssetsGroup): Observable<AssetsGroup> {
     return this.http.post<AssetsGroup>(environment.api + environment.assetsGroup, input)

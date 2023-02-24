@@ -28,3 +28,10 @@ export const emptyAsset: Asset = {
     ValueVariation: 0,
     Include: false,
 }
+
+export const emptyAssetsGroup: AssetsGroup = {
+    Assets: [],
+    ContributionTotal: 1000,
+    Label: "Label",
+    Id: ""
+}

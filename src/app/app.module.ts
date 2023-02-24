@@ -4,8 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { AssetsComponent } from './assets/assets.component';
+import { AssetsComponent, DialogDefault } from './assets/assets.component';
 import { GroupComponent } from './assets/group/group.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(ptBr)
 
@@ -21,14 +24,18 @@ registerLocaleData(ptBr)
     AppComponent,
     SidenavComponent,
     AssetsComponent,
-    GroupComponent
+    GroupComponent,
+    DialogDefault,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

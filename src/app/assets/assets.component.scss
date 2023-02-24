@@ -13,13 +13,13 @@ $lgrey: #979DAC;
     gap: 10vh;
 
     .assets-section-header {
-        margin-top: 10px;
-        padding-left: 2vw;
+        padding: 20px 0 0 10px;
         color: $lgrey;
         border-radius: 10px;
         user-select: none;
         font-size: 3rem;
         align-self: flex-start;
+        justify-self: center;
     }
 
     .group-plus {
@@ -100,5 +100,62 @@ $lgrey: #979DAC;
             background-color: $dblue;
         }
     }
+}
+.dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $dblue !important;
+    padding: 10px;
+    color: $lgrey;
 
+    .title {
+        color: $lgrey;
+    }
+    
+    .content {
+        color: $lgrey;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        padding-bottom: 5vh;
+        width: 100%;
+
+        [matInput] {
+            font-size: 1.3rem;
+            background: $blue-grey;
+            color: $dblue;
+            border-radius: 5px;
+            outline: none;
+            border-style: none;
+            padding: 3px;
+            width: 98%;
+        }
+
+        [matInput]:focus {
+            background-color: $lgrey;
+        }
+
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 50%;
+
+        .btn {
+            background-color: $lgrey;
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border-style: none;
+            outline: none;
+        }
+
+        .btn:hover {
+            background-color: $blue-grey;
+        }
+    }
 }

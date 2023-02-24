@@ -1,7 +1,8 @@
 import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { AssetsGroup, Asset, emptyAsset } from '../../types/assetsGroup.type';
+import { AssetsGroup, Asset, emptyAsset, emptyAssetsGroup } from '../../types/assetsGroup.type';
 import { AssetsService } from '../../services/assets.service';
 import { ActivatedRoute } from '@angular/router';
+import { map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-group',
@@ -20,17 +21,17 @@ export class GroupComponent implements OnInit {
     ValueVariation: 0,
     Include: true,
   }
+  assetsGroup: AssetsGroup = emptyAssetsGroup
 
   constructor(
     private assetsService: AssetsService,
     private router: ActivatedRoute) {
 
-    this.getGroup()
+    this.refreshGroup()
   }
 
   ngOnInit(): void {
   }
-  assetsGroup?: AssetsGroup
 
   calculateTotal() {
     const assets = this.assetsGroup!.Assets.filter(x => x.Include)
@@ -42,7 +43,7 @@ export class GroupComponent implements OnInit {
     this.total.Score = sum(assets, a => a.Score)
   }
 
-  getGroup() {
+  refreshGroup() {
     const id = this.router.snapshot.paramMap.get('id') ?? ''
     this.assetsService.getAssetsGroup(id).subscribe(a => {
       this.assetsGroup = a
@@ -51,39 +52,47 @@ export class GroupComponent implements OnInit {
   }
 
   updateContributionTotal(value: string) {
-    var numberPattern = /\d+/g;
 
-    value = value.match(numberPattern)!.join('')
-    const contributionV = Number(value)
+    const contributionV = Number(value) 
 
-    this.assetsService.updateContributionTotal(this.assetsGroup!.Id, contributionV)
+    this.assetsService.updateAssetsGroup({ id: this.assetsGroup!.Id, contributionT: contributionV })
       .subscribe(a => {
-        this.assetsGroup = a,
-          this.calculateTotal()
+        this.assetsGroup = a
+        this.calculateTotal()
       })
   }
 
   updateAsset(asset: Asset) {
     if (!asset.Include) {
-      this.assetsService.updateAsset(asset, this.assetsGroup!.Id).subscribe(ag => {
-        const distributedScore = (100 - sum(ag.Assets.filter(x => x.Include), a => a.Score)) / Math.floor(ag.Assets.filter(x => x.Include).length)
-        this.assetsGroup!.Assets.filter(x => x.Include).map(a => {
-          a.Score += distributedScore
-          this.assetsService.updateAsset(a, this.assetsGroup!.Id).subscribe(ag => {
+      this.assetsService.updateAsset(asset, this.assetsGroup!.Id).pipe(
+        tap(ag => {
+          const includedAssets = ag.Assets.filter(x => x.Include)
+          const distributedScore = asset.Score / includedAssets.length
+          this.assetsGroup.Assets = includedAssets.map(a => {
+            a.Score += distributedScore
+            return a
+          })
+        }),
+        tap(
+          ag => ag.Assets.filter(x => x.Include).map(
+            a => this.assetsService.updateAsset(a, this.assetsGroup!.Id).subscribe())
+        )).subscribe(() => this.refreshGroup())
+    }
+    else if (asset.Include) {
+      this.assetsService.getAssetsGroup(this.assetsGroup.Id).subscribe(ag1 => {
+        const a = ag1.Assets.find(x => x.Id == asset.Id)!
+        if (!a.Include) {
+          this.recoverScore(asset, ag1.Id, ag1.Assets)
+        }
+        else {
+          this.assetsService.updateAsset(asset, ag1.Id).subscribe(ag => {
             this.assetsGroup = ag
             this.calculateTotal()
           })
-        })
+        }
       })
+
     }
-    else this.assetsService.updateAsset(asset, this.assetsGroup!.Id).subscribe(a => {
-      this.assetsGroup = a,
-        this.calculateTotal()
-    })
-
-
-
-
   }
 
   addEmptyAsset() {
@@ -98,6 +107,22 @@ export class GroupComponent implements OnInit {
       this.assetsGroup = a,
         this.calculateTotal()
     })
+  }
+
+  recoverScore(asset: Asset, id: string, assets: Asset[]) {
+    this.assetsService.updateAsset(asset, id).pipe(
+      tap((ag) => {
+        const includedAssets = assets.filter(x => x.Include)
+        const recoveredScore = asset.Score / includedAssets.length
+        assets = includedAssets.map(a => {
+          a.Score -= recoveredScore
+          return a
+        })
+      }),
+      tap(
+        () => assets.filter(x => x.Include).map(
+          a => this.assetsService.updateAsset(a, this.assetsGroup!.Id).subscribe())
+      )).subscribe(() => this.refreshGroup())
   }
 
 }

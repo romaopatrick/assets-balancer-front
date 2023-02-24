@@ -1,0 +1,11 @@
+<div class="dialog">
+  <h1 class='title'>Edit Assets Group</h1>
+  <div class='content'>
+    <label>Label:</label>
+    <input matInput cdkFocusInitial [(ngModel)]="data">
+  </div>
+  <div class='actions'>
+    <button class="btn" (click)="onNoClick()">Cancel</button>
+    <button class="btn" type="submit" [mat-dialog-close]="data">Save</button>
+  </div>
+</div>
